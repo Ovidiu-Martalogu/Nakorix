@@ -1,11 +1,10 @@
-
+import MainLayout from "./layouts/MainLayout"
+import Home from "./pages/Home"
 
 export default function App() {
   return (
-    <div>
-      <h1>Nakorix</h1>
-      <p>Monitor. Analyze. Protect.</p>
-    </div>
+    <MainLayout>
+      <Home />
+    </MainLayout>
   )
 }
-
