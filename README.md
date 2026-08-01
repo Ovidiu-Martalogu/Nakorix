@@ -1,16 +1,57 @@
-# React + Vite
+# Nakorix
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+**Monitor. Analyze. Protect.**
 
-Currently, two official plugins are available:
+Nakorix este o aplicatie web modulara dezvoltata pentru monitorizarea si analiza dispozitivelor, retelelor si evenimentelor de securitate. Proiectul este construit ca o platforma extensibila, cu arhitectura separata pentru frontend si backend.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Scopul proiectului
 
-## React Compiler
+Obiectivul este dezvoltarea unei aplicatii moderne care sa permita:
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* monitorizarea dispozitivelor;
+* analiza retelelor;
+* gestionarea utilizatorilor;
+* afisarea logurilor si alertelor;
+* extinderea cu noi module fara modificarea arhitecturii existente.
 
-## Expanding the ESLint configuration
+## Tehnologii
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+### Frontend
+
+* React
+* Vite
+* React Router
+* JavaScript
+* PNPM
+
+### Backend *(in dezvoltare)*
+
+* PHP
+* MySQL
+* REST API
+
+## Structura proiectului
+
+```text
+Nakorix/
+│
+├── client/          # Frontend React (planificat)
+├── server/          # Backend PHP (planificat)
+├── database/        # Scripturi SQL (planificat)
+├── docs/            # Documentatie (planificat)
+│
+└── src/
+    ├── components/
+    ├── config/
+    ├── hooks/
+    ├── layouts/
+    ├── pages/
+    ├── services/
+    └── utils/
+```
+
+## Status
+
+**Versiunea curenta:** `v0.1.0`
+
+Proiect aflat in dezvoltare.
