@@ -1,6 +1,6 @@
 
 
-export default function Navbar() {
+export default function Header() {
     return (
         <nav>
             <h2>Nakorix</h2>
