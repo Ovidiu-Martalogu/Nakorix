@@ -1,4 +1,5 @@
 import Header from "../components/Header"
+import Sidebar from "../components/Sidebar"
 import Footer from "../components/Footer"
 
 export default function MainLayout({ children }) {
@@ -6,9 +7,13 @@ export default function MainLayout({ children }) {
         <>
             <Header />
 
-            <main>
-                {children}
-            </main>
+            <div className="app-layout">
+                <Sidebar />
+
+                <main>
+                    {children}
+                </main>
+            </div>
 
             <Footer />
         </>
