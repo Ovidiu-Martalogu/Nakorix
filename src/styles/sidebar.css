@@ -17,3 +17,35 @@ aside li {
 aside li:hover {
     background: #e6e6e6;
 }
+
+aside a {
+    display: block;
+    padding: 15px 20px;
+
+    text-decoration: none;
+    color: #333;
+
+    transition: 0.2s;
+}
+
+aside a:hover {
+    background: #e6e6e6;
+}
+
+aside a.active {
+    background: #2563eb;
+    color: white;
+    font-weight: bold;
+}
+aside a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 15px 20px;
+
+    color: #333;
+    text-decoration: none;
+
+    transition: 0.2s;
+}
