@@ -1,0 +1,19 @@
+aside {
+    width: 240px;
+    background: #f4f4f4;
+    border-right: 1px solid #ddd;
+}
+
+aside ul {
+    list-style: none;
+}
+
+aside li {
+    padding: 15px 20px;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+aside li:hover {
+    background: #e6e6e6;
+}

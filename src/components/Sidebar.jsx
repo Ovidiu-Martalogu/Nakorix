@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom"
 import menu from "../config/menu"
 
 export default function Sidebar() {
@@ -6,7 +7,9 @@ export default function Sidebar() {
             <ul>
                 {menu.map((item) => (
                     <li key={item.id}>
-                        {item.title}
+                        <NavLink to={item.path}>
+                            {item.title}
+                        </NavLink>
                     </li>
                 ))}
             </ul>

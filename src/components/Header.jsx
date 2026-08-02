@@ -2,8 +2,8 @@
 
 export default function Header() {
     return (
-        <nav>
+        <header>
             <h2>Nakorix</h2>
-        </nav>
+        </header>
     )
 }
