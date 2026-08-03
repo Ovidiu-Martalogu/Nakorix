@@ -1,10 +1,14 @@
-
+import { devices } from "../data/devices";
+import DeviceTable from "../components/DeviceTable";
 
 export default function Devices() {
     return (
-        <div>
+        <section className="devices">
+
             <h1>Devices</h1>
-            <p>Connected devices</p>
-        </div>
-    )
+
+            <DeviceTable devices={devices} />
+
+        </section>
+    );
 }

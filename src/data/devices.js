@@ -1,0 +1,47 @@
+export const devices = [
+    {
+        id: 1,
+        name: "Office-PC",
+        ip: "192.168.1.10",
+        mac: "00:1A:2B:3C:4D:5E",
+        type: "Desktop",
+        status: "Online",
+        lastSeen: "12:45",
+    },
+    {
+        id: 2,
+        name: "Laptop-Pro",
+        ip: "192.168.1.15",
+        mac: "00:AA:11:BB:22:CC",
+        type: "Laptop",
+        status: "Offline",
+        lastSeen: "Yesterday",
+    },
+    {
+        id: 3,
+        name: "Android-Phone",
+        ip: "192.168.1.22",
+        mac: "A4:56:B2:91:FF:01",
+        type: "Mobile",
+        status: "Online",
+        lastSeen: "12:40",
+    },
+    {
+        id: 4,
+        name: "Mac-Pro",
+        ip: "192.168.1.36",
+        mac: "23:56:A2:91:CC:01",
+        type: "Tablet",
+        status: "Warning",
+        lastSeen: "15:20",
+    },
+    {
+        id: 5,
+        name: "Mac-Phone",
+        ip: "192.168.1.43",
+        mac: "D5:33:D2:17:8F:10",
+        type: "Mobile",
+        status: "Offline",
+        lastSeen: "13:05",
+    }
+];
