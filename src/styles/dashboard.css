@@ -3,3 +3,61 @@
     grid-template-columns: repeat(4, 1fr);
     gap: 20px;
 }
+
+.dashboard {
+    width: 100%;
+}
+
+.dashboard-title {
+    margin-bottom: 20px;
+
+    font-size: 32px;
+
+    color: var(--text);
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 1200px) {
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+.activity-chart {
+    margin-top: 30px;
+
+    background: var(--surface);
+
+    border-radius: var(--radius);
+
+    padding: 20px;
+
+    box-shadow: var(--shadow);
+}
+
+.activity-chart h2 {
+    margin-bottom: 20px;
+
+    color: var(--text);
+}
+
+.stat-card:hover {
+    transform: translateY(-6px);
+
+    box-shadow: 0 15px 35px rgba(0, 0, 0, .15);
+}
