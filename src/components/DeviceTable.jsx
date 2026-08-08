@@ -1,4 +1,9 @@
-export default function DeviceTable({ devices }) {
+
+import { LuPencil, LuTrash2 } from "react-icons/lu";
+
+
+
+export default function DeviceTable({ devices, onEdit, onDelete }) {
     return (
 
         <table>
@@ -12,6 +17,7 @@ export default function DeviceTable({ devices }) {
                     <th>Type</th>
                     <th>Status</th>
                     <th>Last Seen</th>
+                    <th>Actions</th>
                 </tr>
             </thead>
 
@@ -31,13 +37,23 @@ export default function DeviceTable({ devices }) {
                             </span>
                         </td>
                         <td>{item.lastSeen}</td>
+
+                        <td>
+                            <button onClick={() => onEdit(item)}>
+                                <LuPencil />
+                            </button>
+
+                            <button onClick={() => onDelete(item)}>
+                                <LuTrash2 />
+                            </button>
+                        </td>
                     </tr>
 
                 ))}
 
             </tbody>
 
-        </table>
+        </table >
 
     );
 }
