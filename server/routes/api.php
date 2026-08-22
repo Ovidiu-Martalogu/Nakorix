@@ -10,3 +10,4 @@ use App\Http\Controllers\DeviceController;
 // })->middleware('auth:sanctum');
 
 Route::get('/devices', [DeviceController::class, 'index']);
+Route::post('/devices', [DeviceController::class, 'store']);
