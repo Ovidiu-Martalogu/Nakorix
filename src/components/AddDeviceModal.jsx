@@ -34,25 +34,47 @@ export default function AddDeviceModal({
         });
     };
 
-    const handleSave = () => {
-        const newDevice = {
-            ...device,
-            id: Date.now(),
-            lastSeen: new Date().toLocaleTimeString([], {
-                hour: "2-digit",
-                minute: "2-digit"
-            }),
-        };
+    // doar pt local storage
+    // const handleSave = () => {
+    //     const newDevice = {
+    //         ...device,
+    //         id: Date.now(),
+    //         lastSeen: new Date().toLocaleTimeString([], {
+    //             hour: "2-digit",
+    //             minute: "2-digit"
+    //         }),
+    //     };
+
+    //     setDevices((prevDevices) => [
+    //         ...prevDevices,
+    //         newDevice
+    //     ]);
+
+    //     resetDevice();
+    //     setShowModal(false);
+    // };
+
+
+    // pt Laravel/MySQ
+
+    const handleSave = async () => {
+        const response = await fetch("http://127.0.0.1:8000/api/devices", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(device),
+        });
+
+        const newDevice = await response.json();
 
         setDevices((prevDevices) => [
             ...prevDevices,
-            newDevice
+            newDevice,
         ]);
 
-        resetDevice();
-        setShowModal(false);
+        reset();
     };
-
     return (
 
         <Modal
@@ -144,7 +166,10 @@ export default function AddDeviceModal({
 
                 <Button
                     variant="primary"
-                    onClick={handleSave}>
+                    onClick={() => {
+                        handleSave();
+                        setShowModal(false);
+                    }}>
                     Save Device
                 </Button>
 
