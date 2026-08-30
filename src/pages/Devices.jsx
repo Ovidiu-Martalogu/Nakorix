@@ -1,13 +1,11 @@
 
 import DeviceTable from "../components/DeviceTable";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SearchBar from "../components/SearchBar";
 import AddDeviceButton from "../components/AddDeviceButton";
 import AddDeviceModal from "../components/AddDeviceModal";
 import EditDeviceModal from "../components/EditDeviceModal";
 import DeleteDeviceModal from "../components/DeleteDeviceModal";
-
-import { devices as initialDevices } from "../data/devices";
 
 export default function Devices() {
 
@@ -15,7 +13,7 @@ export default function Devices() {
 
     const [showModal, setShowModal] = useState(false);
 
-    const [devices, setDevices] = useState(initialDevices);
+    const [devices, setDevices] = useState([]);
 
     const [selectedDevice, setSelectedDevice] = useState(null);
 
@@ -23,6 +21,38 @@ export default function Devices() {
 
     const [showDeleteModal, setShowDeleteModal] = useState(false);
 
+    const [loading, setLoading] = useState(true);
+
+    const [error, setError] = useState("");
+
+    useEffect(() => {
+        const fetchDevices = async () => {
+            try {
+                setLoading(true);
+                setError("");
+
+                const response = await fetch(
+                    "http://127.0.0.1:8000/api/devices"
+                );
+
+                if (!response.ok) {
+                    throw new Error("Failed to load devices");
+                }
+
+                const data = await response.json();
+                setDevices(data);
+
+            } catch (error) {
+                console.error(error);
+                setError("Failed to load devices.");
+
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchDevices();
+    }, []);
 
 
     const filteredDevices = devices.filter((item) => {
@@ -62,18 +92,23 @@ export default function Devices() {
 
             <h1>Devices</h1>
 
-            <DeviceTable
-                devices={filteredDevices}
-                onEdit={(device) => {
-                    setSelectedDevice(device);
-                    setShowEditModal(true);
-                }}
-                onDelete={(device) => {
-                    setSelectedDevice(device);
-                    setShowDeleteModal(true);
-                }}
-            />
+            {loading && <p>Loading devices...</p>}
 
+            {error && <p>{error}</p>}
+
+            {!loading && !error && (
+                <DeviceTable
+                    devices={filteredDevices}
+                    onEdit={(device) => {
+                        setSelectedDevice(device);
+                        setShowEditModal(true);
+                    }}
+                    onDelete={(device) => {
+                        setSelectedDevice(device);
+                        setShowDeleteModal(true);
+                    }}
+                />
+            )}
         </section>
     );
 }

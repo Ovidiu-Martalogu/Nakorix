@@ -18,12 +18,16 @@ export default function AddDeviceModal({
         type: "Desktop",
         status: "Online",
     });
+
+    const [errors, setErrors] = useState({});
+
     const handleChange = (e) => {
         setDevice({
             ...device,
             [e.target.name]: e.target.value,
         });
     };
+
     const resetDevice = () => {
         setDevice({
             name: "",
@@ -32,55 +36,86 @@ export default function AddDeviceModal({
             type: "Desktop",
             status: "Online",
         });
+
+        setErrors({});
     };
 
-    // doar pt local storage
-    // const handleSave = () => {
-    //     const newDevice = {
-    //         ...device,
-    //         id: Date.now(),
-    //         lastSeen: new Date().toLocaleTimeString([], {
-    //             hour: "2-digit",
-    //             minute: "2-digit"
-    //         }),
-    //     };
+    const validateDevice = () => {
+        const newErrors = {};
 
-    //     setDevices((prevDevices) => [
-    //         ...prevDevices,
-    //         newDevice
-    //     ]);
+        // Validate name
+        if (!device.name.trim()) {
+            newErrors.name = "Device name is required.";
+        }
 
-    //     resetDevice();
-    //     setShowModal(false);
-    // };
+        // Validate IPv4
+        const ipRegex =
+            /^(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)(\.(25[0-5]|2[0-4]\d|1\d\d|[1-9]?\d)){3}$/;
 
+        if (!ipRegex.test(device.ip)) {
+            newErrors.ip = "Please enter a valid IPv4 address.";
+        }
 
-    // pt Laravel/MySQ
+        // Validate MAC address
+        const macRegex =
+            /^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$/;
+
+        if (!macRegex.test(device.mac)) {
+            newErrors.mac = "Please enter a valid MAC address.";
+        }
+
+        setErrors(newErrors);
+
+        return Object.keys(newErrors).length === 0;
+    };
 
     const handleSave = async () => {
-        const response = await fetch("http://127.0.0.1:8000/api/devices", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(device),
-        });
 
-        const newDevice = await response.json();
+        if (!validateDevice()) {
+            return;
+        }
 
-        setDevices((prevDevices) => [
-            ...prevDevices,
-            newDevice,
-        ]);
+        try {
 
-        reset();
+            const response = await fetch(
+                "http://127.0.0.1:8000/api/devices",
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify(device),
+                }
+            );
+
+            if (!response.ok) {
+                throw new Error("Failed to add device");
+            }
+
+            const newDevice = await response.json();
+
+            setDevices((prevDevices) => [
+                ...prevDevices,
+                newDevice,
+            ]);
+
+            resetDevice();
+            setShowModal(false);
+
+        } catch (error) {
+            console.error(error);
+        }
     };
-    return (
 
+    return (
         <Modal
             show={showModal}
-            onHide={() => setShowModal(false)}
+            onHide={() => {
+                resetDevice();
+                setShowModal(false);
+            }}
         >
+
             <Modal.Header closeButton>
                 <Modal.Title>
                     Add Device
@@ -90,8 +125,13 @@ export default function AddDeviceModal({
             <Modal.Body>
 
                 <Form>
+
+                    {/* Device Name */}
                     <Form.Group className="mb-3">
-                        <Form.Label>Device Name</Form.Label>
+
+                        <Form.Label>
+                            Device Name
+                        </Form.Label>
 
                         <Form.Control
                             type="text"
@@ -99,10 +139,22 @@ export default function AddDeviceModal({
                             placeholder="Enter device name"
                             value={device.name}
                             onChange={handleChange}
+                            isInvalid={!!errors.name}
                         />
+
+                        <Form.Control.Feedback type="invalid">
+                            {errors.name}
+                        </Form.Control.Feedback>
+
                     </Form.Group>
+
+
+                    {/* IP Address */}
                     <Form.Group className="mb-3">
-                        <Form.Label>IP Address</Form.Label>
+
+                        <Form.Label>
+                            IP Address
+                        </Form.Label>
 
                         <Form.Control
                             type="text"
@@ -110,10 +162,22 @@ export default function AddDeviceModal({
                             placeholder="192.168.1.10"
                             value={device.ip}
                             onChange={handleChange}
+                            isInvalid={!!errors.ip}
                         />
+
+                        <Form.Control.Feedback type="invalid">
+                            {errors.ip}
+                        </Form.Control.Feedback>
+
                     </Form.Group>
+
+
+                    {/* MAC Address */}
                     <Form.Group className="mb-3">
-                        <Form.Label>MAC Address</Form.Label>
+
+                        <Form.Label>
+                            MAC Address
+                        </Form.Label>
 
                         <Form.Control
                             type="text"
@@ -121,10 +185,22 @@ export default function AddDeviceModal({
                             placeholder="00:1A:2B:3C:4D:5E"
                             value={device.mac}
                             onChange={handleChange}
+                            isInvalid={!!errors.mac}
                         />
+
+                        <Form.Control.Feedback type="invalid">
+                            {errors.mac}
+                        </Form.Control.Feedback>
+
                     </Form.Group>
+
+
+                    {/* Device Type */}
                     <Form.Group className="mb-3">
-                        <Form.Label>Device Type</Form.Label>
+
+                        <Form.Label>
+                            Device Type
+                        </Form.Label>
 
                         <Form.Select
                             name="type"
@@ -137,9 +213,16 @@ export default function AddDeviceModal({
                             <option>Tablet</option>
                             <option>Server</option>
                         </Form.Select>
+
                     </Form.Group>
+
+
+                    {/* Status */}
                     <Form.Group className="mb-3">
-                        <Form.Label>Status</Form.Label>
+
+                        <Form.Label>
+                            Status
+                        </Form.Label>
 
                         <Form.Select
                             name="status"
@@ -150,30 +233,36 @@ export default function AddDeviceModal({
                             <option>Offline</option>
                             <option>Warning</option>
                         </Form.Select>
+
                     </Form.Group>
+
                 </Form>
 
             </Modal.Body>
 
 
             <Modal.Footer>
+
                 <Button
                     variant="secondary"
-                    onClick={() => setShowModal(false)}
+                    onClick={() => {
+                        resetDevice();
+                        setShowModal(false);
+                    }}
                 >
                     Close
                 </Button>
 
                 <Button
                     variant="primary"
-                    onClick={() => {
-                        handleSave();
-                        setShowModal(false);
-                    }}>
+                    onClick={handleSave}
+                >
                     Save Device
                 </Button>
 
             </Modal.Footer>
+
         </Modal>
     );
 }
+
