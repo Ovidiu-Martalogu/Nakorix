@@ -9,3 +9,7 @@
 @import "./dashboard.css";
 @import "./stat-card.css";
 @import "./devices.css";
+
+@import "./network.css";
+
+@import "./network-discovery.css";

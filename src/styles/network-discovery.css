@@ -1,0 +1,162 @@
+.network-discovery {
+    margin-top: 32px;
+    width: 100%;
+}
+
+.network-discovery-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.network-discovery-header h2 {
+    margin: 0;
+    font-size: 22px;
+}
+
+.network-discovery-header p {
+    margin: 5px 0 0;
+    color: #6b7280;
+    font-size: 14px;
+}
+
+.discovery-count {
+    padding: 6px 12px;
+    border-radius: 20px;
+    background: #eef2ff;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.discovery-table {
+    width: 100%;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.discovery-row {
+    display: grid;
+    grid-template-columns:
+        1.4fr 1fr 1.4fr 0.7fr 1fr 1.2fr;
+
+    align-items: center;
+    min-height: 64px;
+    padding: 0 20px;
+    border-bottom: 1px solid #eef0f3;
+    gap: 16px;
+}
+
+.discovery-row:last-child {
+    border-bottom: none;
+}
+
+.discovery-header-row {
+    min-height: 46px;
+    background: #f8fafc;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+.discovery-device strong {
+    font-size: 14px;
+}
+
+.discovery-mac {
+    font-family: monospace;
+    font-size: 13px;
+}
+
+.discovery-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.discovery-status.known {
+    background: #ecfdf3;
+    color: #15803d;
+}
+
+.discovery-status.new {
+    background: #fff7ed;
+    color: #c2410c;
+}
+
+.discovery-status.offline {
+    background: #f3f4f6;
+    color: #6b7280;
+}
+
+.discovery-add-button {
+    border: none;
+    padding: 7px 12px;
+    border-radius: 7px;
+    background: #2563eb;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.discovery-add-button:hover {
+    opacity: 0.9;
+}
+
+.discovery-check {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.not-discovered {
+    margin-top: 24px;
+}
+
+.not-discovered-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.not-discovered-header h3 {
+    margin: 0;
+    font-size: 17px;
+}
+
+.not-discovered-header span {
+    padding: 3px 8px;
+    border-radius: 12px;
+    background: #f3f4f6;
+    color: #6b7280;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.not-discovered-row {
+    color: #6b7280;
+}
+
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media (max-width: 900px) {
+
+    .discovery-table {
+        overflow-x: auto;
+    }
+
+    .discovery-row {
+        min-width: 850px;
+    }
+
+}

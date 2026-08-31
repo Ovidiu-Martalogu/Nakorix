@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Device;
 
+use Illuminate\Http\JsonResponse;
+
 
 class DeviceController extends Controller
 {
@@ -27,7 +29,7 @@ class DeviceController extends Controller
         return response()->json($device, 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, int $id)
     {
         $request->validate([
             'name' => 'required|string|max:255',
@@ -44,7 +46,7 @@ class DeviceController extends Controller
         return response()->json($device);
     }
 
-    public function destroy($id)
+    public function destroy(int $id)
     {
         $device = Device::findOrFail($id);
 
@@ -53,5 +55,37 @@ class DeviceController extends Controller
         return response()->json([
             'message' => 'Device deleted successfully'
         ]);
+    }
+
+    public function discover(): JsonResponse
+    {
+        $script = base_path('scripts/device-discovery.ps1');
+
+        if (!file_exists($script)) {
+            return response()->json([
+                'message' => 'Device discovery script not found.'
+            ], 500);
+        }
+
+        $command = 'powershell.exe -NoProfile -ExecutionPolicy Bypass -File '
+            . escapeshellarg($script);
+
+        $output = shell_exec($command);
+
+        if ($output === null) {
+            return response()->json([
+                'message' => 'Unable to run device discovery.'
+            ], 500);
+        }
+
+        $devices = json_decode(trim($output), true);
+
+        if (!is_array($devices)) {
+            return response()->json([
+                'message' => 'Invalid device discovery response.'
+            ], 500);
+        }
+
+        return response()->json($devices);
     }
 }
