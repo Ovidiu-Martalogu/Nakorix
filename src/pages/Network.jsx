@@ -1,4 +1,5 @@
 
+
 import { useEffect, useRef, useState } from "react";
 
 export default function Network() {
@@ -17,185 +18,187 @@ export default function Network() {
     const previousNetwork = useRef(null);
 
 
-    useEffect(() => {
+    const loadNetwork = async () => {
 
-        const loadNetwork = async () => {
+        try {
 
-            try {
+            setLoading(true);
 
-                const response = await fetch(
-                    "http://127.0.0.1:8000/api/network"
+            const response = await fetch(
+                "http://127.0.0.1:8000/api/network"
+            );
+
+            if (!response.ok) {
+                throw new Error(
+                    "Failed to load network information"
                 );
-
-                if (!response.ok) {
-                    throw new Error(
-                        "Failed to load network information"
-                    );
-                }
-
-                const data = await response.json();
-
-
-                /*
-                 * Dacă avem deja o configurație,
-                 * o comparăm cu cea nouă.
-                 */
-                if (previousNetwork.current) {
-
-                    const previous =
-                        previousNetwork.current;
-
-                    const changes = [];
-
-
-                    if (
-                        previous.interface !==
-                        data.interface
-                    ) {
-                        changes.push({
-                            field: "Interface",
-                            oldValue: previous.interface,
-                            newValue: data.interface,
-                        });
-                    }
-
-
-                    if (
-                        previous.adapter !==
-                        data.adapter
-                    ) {
-                        changes.push({
-                            field: "Adapter",
-                            oldValue: previous.adapter,
-                            newValue: data.adapter,
-                        });
-                    }
-
-
-                    if (
-                        previous.network !==
-                        data.network
-                    ) {
-                        changes.push({
-                            field: "Network",
-                            oldValue: previous.network,
-                            newValue: data.network,
-                        });
-                    }
-
-
-                    if (
-                        previous.ipv4 !==
-                        data.ipv4
-                    ) {
-                        changes.push({
-                            field: "IPv4",
-                            oldValue: previous.ipv4,
-                            newValue: data.ipv4,
-                        });
-                    }
-
-
-                    if (
-                        previous.gateway !==
-                        data.gateway
-                    ) {
-                        changes.push({
-                            field: "Gateway",
-                            oldValue: previous.gateway,
-                            newValue: data.gateway,
-                        });
-                    }
-
-
-                    if (
-                        JSON.stringify(previous.dns) !==
-                        JSON.stringify(data.dns)
-                    ) {
-                        changes.push({
-                            field: "DNS",
-                            oldValue:
-                                previous.dns?.join(", "),
-                            newValue:
-                                data.dns?.join(", "),
-                        });
-                    }
-
-
-                    if (
-                        previous.mac !==
-                        data.mac
-                    ) {
-                        changes.push({
-                            field: "MAC",
-                            oldValue: previous.mac,
-                            newValue: data.mac,
-                        });
-                    }
-
-
-                    if (
-                        previous.status !==
-                        data.status
-                    ) {
-                        changes.push({
-                            field: "Status",
-                            oldValue: previous.status,
-                            newValue: data.status,
-                        });
-                    }
-
-
-                    /*
-                     * Dacă există modificări,
-                     * le afișăm și memorăm momentul.
-                     */
-                    if (changes.length > 0) {
-
-                        setNetworkChanges(changes);
-
-                        setLastNetworkChange(
-                            new Date()
-                        );
-
-                    } else {
-
-                        setNetworkChanges([]);
-
-                    }
-
-                }
-
-
-                /*
-                 * Actualizăm configurația afișată.
-                 */
-                setNetwork(data);
-
-
-                /*
-                 * Salvăm configurația actuală
-                 * pentru următoarea comparație.
-                 */
-                previousNetwork.current = data;
-
-
-                setLoading(false);
-
-                setError("");
-
-            } catch (error) {
-
-                console.error(error);
-
-                setError(
-                    "Unable to load network information."
-                );
-
-                setLoading(false);
             }
-        };
 
+            const data = await response.json();
+
+
+            /*
+             * Dacă avem deja o configurație,
+             * o comparăm cu cea nouă.
+             */
+            if (previousNetwork.current) {
+
+                const previous =
+                    previousNetwork.current;
+
+                const changes = [];
+
+
+                if (
+                    previous.interface !==
+                    data.interface
+                ) {
+                    changes.push({
+                        field: "Interface",
+                        oldValue: previous.interface,
+                        newValue: data.interface,
+                    });
+                }
+
+
+                if (
+                    previous.adapter !==
+                    data.adapter
+                ) {
+                    changes.push({
+                        field: "Adapter",
+                        oldValue: previous.adapter,
+                        newValue: data.adapter,
+                    });
+                }
+
+
+                if (
+                    previous.network !==
+                    data.network
+                ) {
+                    changes.push({
+                        field: "Network",
+                        oldValue: previous.network,
+                        newValue: data.network,
+                    });
+                }
+
+
+                if (
+                    previous.ipv4 !==
+                    data.ipv4
+                ) {
+                    changes.push({
+                        field: "IPv4",
+                        oldValue: previous.ipv4,
+                        newValue: data.ipv4,
+                    });
+                }
+
+
+                if (
+                    previous.gateway !==
+                    data.gateway
+                ) {
+                    changes.push({
+                        field: "Gateway",
+                        oldValue: previous.gateway,
+                        newValue: data.gateway,
+                    });
+                }
+
+
+                if (
+                    JSON.stringify(previous.dns) !==
+                    JSON.stringify(data.dns)
+                ) {
+                    changes.push({
+                        field: "DNS",
+                        oldValue:
+                            previous.dns?.join(", "),
+                        newValue:
+                            data.dns?.join(", "),
+                    });
+                }
+
+
+                if (
+                    previous.mac !==
+                    data.mac
+                ) {
+                    changes.push({
+                        field: "MAC",
+                        oldValue: previous.mac,
+                        newValue: data.mac,
+                    });
+                }
+
+
+                if (
+                    previous.status !==
+                    data.status
+                ) {
+                    changes.push({
+                        field: "Status",
+                        oldValue: previous.status,
+                        newValue: data.status,
+                    });
+                }
+
+
+                /*
+                 * Dacă există modificări,
+                 * le afișăm și memorăm momentul.
+                 */
+                if (changes.length > 0) {
+
+                    setNetworkChanges(changes);
+
+                    setLastNetworkChange(
+                        new Date()
+                    );
+
+                } else {
+
+                    setNetworkChanges([]);
+
+                }
+
+            }
+
+
+            /*
+             * Actualizăm configurația afișată.
+             */
+            setNetwork(data);
+
+
+            /*
+             * Salvăm configurația actuală
+             * pentru următoarea comparație.
+             */
+            previousNetwork.current = data;
+
+
+            setLoading(false);
+
+            setError("");
+
+        } catch (error) {
+
+            console.error(error);
+
+            setError(
+                "Unable to load network information."
+            );
+
+            setLoading(false);
+        }
+    };
+
+
+    useEffect(() => {
 
         // Prima citire imediat
         loadNetwork();
@@ -216,12 +219,16 @@ export default function Network() {
     }, []);
 
 
-    if (loading) {
+    if (loading && !network) {
 
         return (
             <section className="network">
 
-                <h1>Network</h1>
+                <div className="network-header">
+
+                    <h1>Network</h1>
+
+                </div>
 
                 <p>
                     Loading network information...
@@ -232,16 +239,29 @@ export default function Network() {
     }
 
 
-    if (error) {
+    if (error && !network) {
 
         return (
             <section className="network">
 
-                <h1>Network</h1>
+                <div className="network-header">
+
+                    <h1>Network</h1>
+
+                </div>
 
                 <p>
                     {error}
                 </p>
+
+                <button
+                    type="button"
+                    className="network-refresh-button"
+                    onClick={loadNetwork}
+                    disabled={loading}
+                >
+                    ⟳ Refresh
+                </button>
 
             </section>
         );
@@ -256,11 +276,25 @@ export default function Network() {
 
                 <h1>Network</h1>
 
-                {network?.status && (
-                    <span>
-                        ● {network.status}
-                    </span>
-                )}
+                <div className="network-header-actions">
+
+                    {network?.status && (
+                        <span className="network-status">
+                            <span className="status-dot"></span>
+                            {network.status}
+                        </span>
+                    )}
+
+                    <button
+                        type="button"
+                        className="network-refresh-button"
+                        onClick={loadNetwork}
+                        disabled={loading}
+                    >
+                        {loading ? "⟳ Loading..." : "⟳ Refresh"}
+                    </button>
+
+                </div>
 
             </div>
 
@@ -405,11 +439,14 @@ export default function Network() {
                 </div>
 
             </div>
+
+
             {networkChanges.length > 0 && (
 
                 <div className="network-events">
 
                     <div className="network-events-header">
+
                         <h2>Network Events</h2>
 
                         {lastNetworkChange && (
@@ -417,6 +454,7 @@ export default function Network() {
                                 {lastNetworkChange.toLocaleTimeString()}
                             </span>
                         )}
+
                     </div>
 
 
@@ -458,7 +496,6 @@ export default function Network() {
             )}
 
         </section>
-
 
     );
 

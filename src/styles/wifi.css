@@ -1,0 +1,108 @@
+/* =========================================
+   WI-FI
+========================================= */
+
+.wifi {
+    width: 100%;
+}
+
+.wifi-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.wifi-header h1 {
+    margin: 0;
+}
+
+
+.wifi-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+
+.wifi-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+.wifi-card h2 {
+    margin: 0 0 1rem;
+    font-size: 1.1rem;
+}
+
+
+.wifi-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+
+.wifi-row:last-child {
+    border-bottom: none;
+}
+
+
+.wifi-row span {
+    color: #6b7280;
+}
+
+
+.wifi-row strong {
+    text-align: right;
+    word-break: break-word;
+}
+
+
+.wifi-info {
+    margin-top: 1.5rem;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+.wifi-info h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.1rem;
+}
+
+
+.wifi-info p {
+    margin: 0;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+
+@media (max-width: 768px) {
+
+    .wifi-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .wifi-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .wifi-row strong {
+        text-align: left;
+    }
+
+}

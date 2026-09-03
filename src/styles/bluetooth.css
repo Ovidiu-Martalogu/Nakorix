@@ -1,0 +1,109 @@
+
+/* =========================================
+  Bluetooth
+========================================= */
+
+.bluetooth {
+    width: 100%;
+}
+
+.bluetooth-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.bluetooth-header h1 {
+    margin: 0;
+}
+
+
+.bluetooth-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+}
+
+
+.bluetooth-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+.bluetooth-card h2 {
+    margin: 0 0 1rem;
+    font-size: 1.1rem;
+}
+
+
+.bluetooth-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+
+.bluetooth-row:last-child {
+    border-bottom: none;
+}
+
+
+.bluetooth-row span {
+    color: #6b7280;
+}
+
+
+.bluetooth-row strong {
+    text-align: right;
+    word-break: break-word;
+}
+
+
+.bluetooth-info {
+    margin-top: 1.5rem;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+.bluetooth-info h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.1rem;
+}
+
+
+.bluetooth-info p {
+    margin: 0;
+    color: #6b7280;
+    line-height: 1.6;
+}
+
+
+@media (max-width: 768px) {
+
+    .bluetooth-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .bluetooth-row {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .bluetooth-row strong {
+        text-align: left;
+    }
+
+}

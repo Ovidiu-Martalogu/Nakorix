@@ -1,0 +1,54 @@
+/* =========================================
+   LOGS
+========================================= */
+
+.logs {
+    width: 100%;
+}
+
+.logs-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.logs-header h1 {
+    margin: 0;
+}
+
+
+.logs-card {
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.25rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+
+.logs-empty {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+
+.logs-empty h2 {
+    margin: 0 0 0.75rem;
+    font-size: 1.1rem;
+}
+
+
+.logs-empty p {
+    margin: 0;
+    color: #6b7280;
+}
+
+
+@media (max-width: 768px) {
+
+    .logs-header {
+        align-items: flex-start;
+    }
+
+}

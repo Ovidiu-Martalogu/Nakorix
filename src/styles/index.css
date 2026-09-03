@@ -13,3 +13,12 @@
 @import "./network.css";
 
 @import "./network-discovery.css";
+
+@import "./wifi.css";
+
+@import "./bluetooth.css";
+
+@import "./sdr.css";
+@import "./logs.css";
+
+@import "./settings.css";
