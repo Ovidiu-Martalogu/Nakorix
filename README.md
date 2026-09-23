@@ -55,3 +55,8 @@ Nakorix/
 **Versiunea curenta:** `v0.1.0`
 
 Proiect aflat in dezvoltare.
+
+
+pnpm run dev
+in server:
+php artisan serve
