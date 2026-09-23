@@ -9,6 +9,8 @@ use App\Http\Controllers\NetworkController;
 
 use App\Http\Controllers\LogController;
 
+use App\Http\Controllers\ConnectionController;
+
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
@@ -23,6 +25,8 @@ Route::put('/devices/{id}', [DeviceController::class, 'update']);
 Route::delete('/devices/{id}', [DeviceController::class, 'destroy']);
 
 Route::get('/network', [NetworkController::class, 'index']);
+
+Route::get('/connections', [ConnectionController::class, 'index']);
 
 Route::get('/logs', [LogController::class, 'index']);
 Route::post('/logs', [LogController::class, 'store']);

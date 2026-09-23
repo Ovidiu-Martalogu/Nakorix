@@ -3,6 +3,7 @@ import {
     LuLayoutDashboard,
     LuMonitor,
     LuNetwork,
+    LuWaypoints,
     LuWifi,
     LuBluetooth,
     LuRadio,
@@ -33,34 +34,40 @@ const menu = [
     },
     {
         id: 4,
+        title: "Connections",
+        path: "/connections",
+        icon: LuWaypoints,
+    },
+    {
+        id: 5,
         title: "Wi-Fi",
         path: "/wifi",
         icon: LuWifi,
 
     },
     {
-        id: 5,
+        id: 6,
         title: "Bluetooth",
         path: "/bluetooth",
         icon: LuBluetooth,
 
     },
     {
-        id: 6,
+        id: 7,
         title: "SDR",
         path: "/sdr",
         icon: LuRadio,
 
     },
     {
-        id: 7,
+        id: 8,
         title: "Logs",
         path: "/logs",
         icon: LuFileText,
 
     },
     {
-        id: 8,
+        id: 9,
         title: "Settings",
         path: "/settings",
         icon: LuSettings,

@@ -12,6 +12,8 @@
 
 @import "./network.css";
 
+@import "./connections.css";
+
 @import "./network-discovery.css";
 
 @import "./wifi.css";

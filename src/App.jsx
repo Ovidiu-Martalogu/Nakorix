@@ -13,6 +13,8 @@ import SDR from "./pages/SDR"
 import Logs from "./pages/Logs"
 import Settings from "./pages/Settings"
 
+import Connections from "./pages/Connections";
+
 
 export default function App() {
   return (
@@ -27,6 +29,7 @@ export default function App() {
         <Route path="/sdr" element={<SDR />} />
         <Route path="/logs" element={<Logs />} />
         <Route path="/settings" element={<Settings />} />
+        <Route path="/connections" element={<Connections />} />
       </Routes>
     </MainLayout>
   )
