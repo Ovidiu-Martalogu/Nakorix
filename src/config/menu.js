@@ -8,6 +8,7 @@ import {
     LuBluetooth,
     LuRadio,
     LuFileText,
+    LuBellRing,
     LuSettings,
 } from "react-icons/lu";
 
@@ -68,11 +69,17 @@ const menu = [
     },
     {
         id: 9,
+        title: "Resource Alerts",
+        path: "/resource-alerts",
+        icon: LuBellRing,
+    },
+    {
+        id: 10,
         title: "Settings",
         path: "/settings",
         icon: LuSettings,
 
-    },
+    }
 ]
 
 export default menu

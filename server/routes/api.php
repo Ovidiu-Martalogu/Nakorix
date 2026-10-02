@@ -11,6 +11,9 @@ use App\Http\Controllers\LogController;
 
 use App\Http\Controllers\ConnectionController;
 
+use App\Http\Controllers\ResourceAlertController;
+
+
 // Route::get('/user', function (Request $request) {
 //     return $request->user();
 // })->middleware('auth:sanctum');
@@ -30,3 +33,7 @@ Route::get('/connections', [ConnectionController::class, 'index']);
 
 Route::get('/logs', [LogController::class, 'index']);
 Route::post('/logs', [LogController::class, 'store']);
+
+
+Route::get('/resource-alerts', [ResourceAlertController::class, 'index']);
+Route::post('/resource-alerts', [ResourceAlertController::class, 'store']);

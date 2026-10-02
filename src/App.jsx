@@ -13,6 +13,8 @@ import SDR from "./pages/SDR"
 import Logs from "./pages/Logs"
 import Settings from "./pages/Settings"
 
+import ResourceAlerts from "./pages/ResourceAlerts"
+
 import Connections from "./pages/Connections";
 
 
@@ -30,6 +32,7 @@ export default function App() {
         <Route path="/logs" element={<Logs />} />
         <Route path="/settings" element={<Settings />} />
         <Route path="/connections" element={<Connections />} />
+        <Route path="/resource-alerts" element={<ResourceAlerts />} />
       </Routes>
     </MainLayout>
   )
