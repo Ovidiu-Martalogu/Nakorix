@@ -16,7 +16,8 @@ export default function ResourceAlerts() {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
-    useEffect(() => {
+
+    const loadAlerts = () => {
         fetch(API_RESOURCE_ALERTS_URL)
             .then(response => {
                 if (!response.ok) {
@@ -39,6 +40,19 @@ export default function ResourceAlerts() {
                 setError("Nu s-au putut incarca alertele.");
                 setLoading(false);
             });
+    };
+
+    useEffect(() => {
+        loadAlerts();
+
+        const interval = setInterval(
+            loadAlerts,
+            10000
+        );
+
+        return () => {
+            clearInterval(interval);
+        };
     }, []);
 
     const handleSort = (field) => {
@@ -62,6 +76,18 @@ export default function ResourceAlerts() {
             alert.severity.toLowerCase() === severity.toLowerCase()
         )
     );
+
+    const getSeverityClass = (severity) => {
+        if (severity.toLowerCase() === "high") {
+            return "badge bg-danger";
+        }
+
+        if (severity.toLowerCase() === "medium") {
+            return "badge bg-warning text-dark";
+        }
+
+        return "badge bg-success";
+    };
 
     return (
 
@@ -133,7 +159,11 @@ export default function ResourceAlerts() {
                                 <td>{alert.pid}</td>
                                 <td>{alert.cpu_usage}%</td>
                                 <td>{alert.memory_usage_mb} MB</td>
-                                <td>{alert.severity}</td>
+                                <td>
+                                    <span className={getSeverityClass(alert.severity)}>
+                                        {alert.severity}
+                                    </span>
+                                </td>
                                 <td>{alert.message}</td>
                                 <td>{alert.detected_at}</td>
                             </tr>
